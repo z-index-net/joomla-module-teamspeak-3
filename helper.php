@@ -34,6 +34,7 @@ class ModTeamspeak3ViewerHelper
         $key = md5($url);
 
         if (!$ts3_VirtualServer = $cache->get($key)) {
+            // TODO try & catch
             $ts3_VirtualServer = TeamSpeak3::factory($url);
             //$cache->store($ts3_VirtualServer, $key); // TODO
         }

@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die;
 
-JLoader::register('TeamSpeak3', dirname(__FILE__) . '/library/TeamSpeak3/TeamSpeak3.php');
+JLoader::register('TeamSpeak3', JPATH_LIBRARIES . '/TeamSpeak3/TeamSpeak3.php');
 
 JLoader::register('ModTeamspeak3ViewerHelper', dirname(__FILE__) . '/helper.php');
 
