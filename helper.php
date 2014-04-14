@@ -20,7 +20,7 @@ class ModTeamspeak3ViewerHelper
 
         $cache = JFactory::getCache('ts3', 'output');
         $cache->setCaching(1);
-        $cache->setLifeTime($params->get('cache_time', 60));
+        $cache->setLifeTime($params->get('cache_time', 5));
 
         $query = array();
         $query['server_port'] = $params->get('udp_port');
@@ -34,14 +34,35 @@ class ModTeamspeak3ViewerHelper
         $key = md5($url);
 
         if (!$ts3 = $cache->get($key)) {
+            $ts3 = TeamSpeak3::factory($url);
             try {
-                $ts3 = TeamSpeak3::factory($url);
             } catch (TeamSpeak3_Exception $e) {
-                return $e->getMessage();
+                return $e->getMessage() . ' (' . $e->getCode() . ')';
             }
             $cache->store($ts3, $key);
         }
 
-        return $ts3;
+        $dataKey = md5($key . $params->get('layout'));
+
+        if (!$data = $cache->get($dataKey)) {
+            switch ($params->get('layout')) {
+                default:
+                case 'default':
+                    $images = JUri::base(true) . '/media/teamspeak3/images';
+
+                    $data = new stdClass;
+                    $data->viewer = $ts3->getViewer(new TeamSpeak3_Viewer_Html($images . '/', $images . '/flags/', 'data:image'));
+
+                    break;
+
+                case 'stats':
+                    $data = $ts3->getInfo(true, true);
+
+                    break;
+            }
+            $cache->store($data, $dataKey);
+        }
+
+        return $data;
     }
 }

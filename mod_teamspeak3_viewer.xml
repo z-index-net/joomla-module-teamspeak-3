@@ -36,6 +36,7 @@
                 <field name="server_login" type="text" required="true" label="MOD_TEAMSPEAK3_VIEWER_SERVER_LOGIN_LABEL" description="MOD_TEAMSPEAK3_VIEWER_SERVER_LOGIN_DESC" />
                 <field name="server_password" type="password" required="true" label="MOD_TEAMSPEAK3_VIEWER_SERVER_PASSWORD_LABEL" description="MOD_TEAMSPEAK3_VIEWER_SERVER_PASSWORD_DESC" />
                 <field name="connection_timeout" type="text" default="5" filter="integer" required="true" label="MOD_TEAMSPEAK3_VIEWER_CONNECTION_TIMEOUT_LABEL" description="MOD_TEAMSPEAK3_VIEWER_CONNECTION_TIMEOUT_DESC" />
+                <field name="cache_time" type="text" default="5" filter="integer" required="true" label="MOD_TEAMSPEAK3_VIEWER_CACHE_TIME_LABEL" description="MOD_TEAMSPEAK3_VIEWER_CACHE_TIME_DESC" />
             </fieldset>
             <fieldset name="advanced">
                 <field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />

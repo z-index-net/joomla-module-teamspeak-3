@@ -9,10 +9,12 @@
 
 defined('_JEXEC') or die;
 
-JFactory::getDocument()->addStyleSheet(JUri::base(true) . '/modules/' . $module->module . '/tmpl/default.css');
+if ($params->get('tooltip', 1)) {
+    JHtml::_('behavior.tooltip', '.mod_teamspeak3_viewer .corpus');
+}
 
-$images = JUri::base(true) . '/media/teamspeak3/images';
+JFactory::getDocument()->addStyleSheet(JUri::base(true) . '/modules/' . $module->module . '/tmpl/default.css');
 ?>
-<div class="mod_teamspeak3_viewer">
-    <?php echo $ts3->getViewer(new TeamSpeak3_Viewer_Html($images . '/', $images . '/flags/', 'data:image')); ?>
+<div class="mod_teamspeak3_viewer default">
+    <?php echo $data->viewer; ?>
 </div>

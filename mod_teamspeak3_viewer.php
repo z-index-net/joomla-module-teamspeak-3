@@ -15,11 +15,13 @@ TeamSpeak3::init();
 
 JLoader::register('ModTeamspeak3ViewerHelper', dirname(__FILE__) . '/helper.php');
 
-$ts3 = ModTeamspeak3ViewerHelper::getData($params);
+$params->set('layout', $params->get('layout', 'default'));
 
-if (is_string($ts3)) {
-    echo $ts3;
+$data = ModTeamspeak3ViewerHelper::getData($params);
+
+if (is_string($data)) {
+    echo $data;
     return;
 }
 
-require JModuleHelper::getLayoutPath($module->module, $params->get('layout', 'default'));
+require JModuleHelper::getLayoutPath($module->module, $params->get('layout'));
