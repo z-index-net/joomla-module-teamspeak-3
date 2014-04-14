@@ -13,7 +13,11 @@ class mod_teamspeak3_viewerInstallerScript
 {
     public function preflight()
     {
-        // TODO check if 'stream_socket_client' available
+        if (!function_exists('stream_socket_client')) {
+            JFactory::getApplication()->enqueueMessage(__CLASS__ . ': network functions are not available in this PHP installation', 'error');
+            return false;
+        }
+
         return true;
     }
 

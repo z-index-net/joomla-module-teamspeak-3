@@ -14,7 +14,9 @@
         <folder>tmpl</folder>
         <filename>helper.php</filename>
     </files>
-    <!-- // TODO images via 'media' from Joomla -->
+    <media folder="media" destination="teamspeak3">
+        <folder>images</folder>
+    </media>
     <scriptfile>script.installer.php</scriptfile>
     <languages folder="language">
         <language tag="en-GB">en-GB/en-GB.mod_teamspeak3_viewer.ini</language>

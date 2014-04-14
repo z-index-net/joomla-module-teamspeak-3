@@ -20,7 +20,7 @@ class ModTeamspeak3ViewerHelper
 
         $cache = JFactory::getCache('ts3', 'output');
         $cache->setCaching(1);
-        $cache->setLifeTime($params->get('ts3cachetime', 60));
+        $cache->setLifeTime($params->get('cache_time', 60));
 
         $query = array();
         $query['server_port'] = $params->get('udp_port');
@@ -33,12 +33,15 @@ class ModTeamspeak3ViewerHelper
 
         $key = md5($url);
 
-        if (!$ts3_VirtualServer = $cache->get($key)) {
-            // TODO try & catch
-            $ts3_VirtualServer = TeamSpeak3::factory($url);
-            //$cache->store($ts3_VirtualServer, $key); // TODO
+        if (!$ts3 = $cache->get($key)) {
+            try {
+                $ts3 = TeamSpeak3::factory($url);
+            } catch (TeamSpeak3_Exception $e) {
+                return $e->getMessage();
+            }
+            $cache->store($ts3, $key);
         }
 
-        return $ts3_VirtualServer;
+        return $ts3;
     }
 }

@@ -11,8 +11,8 @@ defined('_JEXEC') or die;
 
 JFactory::getDocument()->addStyleSheet(JUri::base(true) . '/modules/' . $module->module . '/tmpl/default.css');
 
-$images = JUri::base(true) . '/modules/' . $module->module . '/tmpl/images'; // TODO
+$images = JUri::base(true) . '/media/teamspeak3/images';
 ?>
 <div class="mod_teamspeak3_viewer">
-    <?php echo $ts3_VirtualServer->getViewer(new TeamSpeak3_Viewer_Html($images . '/', $images . '/flags/', 'data:image')); ?>
+    <?php echo $ts3->getViewer(new TeamSpeak3_Viewer_Html($images . '/', $images . '/flags/', 'data:image')); ?>
 </div>

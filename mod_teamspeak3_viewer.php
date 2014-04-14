@@ -11,8 +11,15 @@ defined('_JEXEC') or die;
 
 JLoader::register('TeamSpeak3', JPATH_LIBRARIES . '/TeamSpeak3/TeamSpeak3.php');
 
+TeamSpeak3::init();
+
 JLoader::register('ModTeamspeak3ViewerHelper', dirname(__FILE__) . '/helper.php');
 
-$ts3_VirtualServer = ModTeamspeak3ViewerHelper::getData($params);
+$ts3 = ModTeamspeak3ViewerHelper::getData($params);
+
+if (is_string($ts3)) {
+    echo $ts3;
+    return;
+}
 
 require JModuleHelper::getLayoutPath($module->module, $params->get('layout', 'default'));
