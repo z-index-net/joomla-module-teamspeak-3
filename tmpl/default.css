@@ -1,0 +1,20 @@
+.mod_teamspeak3_viewer {
+
+}
+
+.mod_teamspeak3_viewer table {
+}
+
+.mod_teamspeak3_viewer table td {
+    white-space: nowrap;
+}
+
+.mod_teamspeak3_viewer table .prefix {
+}
+
+.mod_teamspeak3_viewer table .corpus {
+}
+
+.mod_teamspeak3_viewer table .suffix {
+    text-align: right;
+}

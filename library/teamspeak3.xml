@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="library" version="2.5" client="site" method="upgrade">
+    <name>TeamSpeak 3 PHP Framework</name>
+    <libraryname>TeamSpeak3</libraryname>
+    <author>Sven 'ScP' Paulsen</author>
+    <creationDate>January 2010</creationDate>
+    <copyright>Copyright (c) 2010 by Planet TeamSpeak. All rights reserved.</copyright>
+    <license>GNU/GPL http://www.gnu.org/licenses/</license>
+    <authorEmail>info@planetteamspeak.com</authorEmail>
+    <authorUrl>www.planetteamspeak.com</authorUrl>
+    <version>1.1.23</version>
+    <description>The TS3 PHP Framework is a is a modern use-at-will framework that provides individual components to communicate with the TeamSpeak 3 Server.</description>
+    <files>
+        <folder>TeamSpeak3</folder>
+    </files>
+</extension>

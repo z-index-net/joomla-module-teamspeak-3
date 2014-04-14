@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5" client="site" method="upgrade">
+    <name>MOD_TEAMSPEAK3_VIEWER</name>
+    <author>mediahof</author>
+    <creationDate>Apr 2014</creationDate>
+    <copyright>(C) 2014 Branko Wilhelm</copyright>
+    <license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+    <authorEmail>branko.wilhelm@gmail.com</authorEmail>
+    <authorUrl>www.z-index.net</authorUrl>
+    <version>@REVISION@</version>
+    <description>MOD_TEAMSPEAK3_VIEWER_DESC</description>
+    <files>
+        <filename module="mod_teamspeak3_viewer">mod_teamspeak3_viewer.php</filename>
+        <folder>tmpl</folder>
+        <filename>helper.php</filename>
+    </files>
+    <!-- // TODO images via 'media' from Joomla -->
+    <scriptfile>script.installer.php</scriptfile>
+    <languages folder="language">
+        <language tag="en-GB">en-GB/en-GB.mod_teamspeak3_viewer.ini</language>
+        <language tag="en-GB">en-GB/en-GB.mod_teamspeak3_viewer.sys.ini</language>
+        <language tag="de-DE">de-DE/de-DE.mod_teamspeak3_viewer.ini</language>
+        <language tag="de-DE">de-DE/de-DE.mod_teamspeak3_viewer.sys.ini</language>
+    </languages>
+    <updateservers>
+        <server type="collection" priority="1" name="z-index development">http://www.z-index.net/en/extensions.xml</server>
+    </updateservers>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="host" type="text" default="127.0.0.1" required="true" label="MOD_TEAMSPEAK3_VIEWER_HOST_LABEL" description="MOD_TEAMSPEAK3_VIEWER_HOST_DESC" />
+                <field name="query_port" type="text" default="10011" filter="integer" required="true" label="MOD_TEAMSPEAK3_VIEWER_QUERY_PORT_LABEL" description="MOD_TEAMSPEAK3_VIEWER_QUERY_PORT_DESC" />
+                <field name="udp_port" type="text" default="9987" filter="integer" required="true" label="MOD_TEAMSPEAK3_VIEWER_UDP_PORT_LABEL" description="MOD_TEAMSPEAK3_VIEWER_UDP_PORT_DESC" />
+                <field name="server_login" type="text" required="true" label="MOD_TEAMSPEAK3_VIEWER_SERVER_LOGIN_LABEL" description="MOD_TEAMSPEAK3_VIEWER_SERVER_LOGIN_DESC" />
+                <field name="server_password" type="password" required="true" label="MOD_TEAMSPEAK3_VIEWER_SERVER_PASSWORD_LABEL" description="MOD_TEAMSPEAK3_VIEWER_SERVER_PASSWORD_DESC" />
+                <field name="connection_timeout" type="text" default="5" filter="integer" required="true" label="MOD_TEAMSPEAK3_VIEWER_CONNECTION_TIMEOUT_LABEL" description="MOD_TEAMSPEAK3_VIEWER_CONNECTION_TIMEOUT_DESC" />
+            </fieldset>
+            <fieldset name="advanced">
+                <field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+                <field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>
