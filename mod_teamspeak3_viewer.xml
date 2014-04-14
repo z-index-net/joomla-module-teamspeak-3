@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="2.5" client="site" method="upgrade">
     <name>MOD_TEAMSPEAK3_VIEWER</name>
-    <author>mediahof</author>
+    <author>Branko Wilhelm</author>
     <creationDate>Apr 2014</creationDate>
     <copyright>(C) 2014 Branko Wilhelm</copyright>
     <license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
