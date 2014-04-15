@@ -9,8 +9,6 @@
 
 defined('_JEXEC') or die;
 
-JFactory::getDocument()->addStyleSheet(JUri::base(true) . '/modules/' . $module->module . '/tmpl/default.css');
-
 $infos = $params->get('infos');
 ?>
 <div class="mod_teamspeak3_viewer infos">

@@ -13,10 +13,10 @@ if ($params->get('tooltip', 1)) {
     JHtml::_('behavior.tooltip', '.mod_teamspeak3_viewer .corpus');
 }
 
-JFactory::getDocument()->addStyleSheet(JUri::base(true) . '/media/teamspeak3/css/default.css');
-JFactory::getDocument()->addScript(JUri::base(true) . '/media/teamspeak3/js/default.js');
+JFactory::getDocument()->addStyleSheet(JUri::base(true) . '/media/teamspeak3/css/viewer.css');
+JFactory::getDocument()->addScript(JUri::base(true) . '/media/teamspeak3/js/viewer.js');
 ?>
-    <div class="mod_teamspeak3_viewer default">
+    <div class="mod_teamspeak3_viewer viewer">
         <?php echo $data->viewer; ?>
     </div>
 <?php
