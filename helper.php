@@ -42,7 +42,7 @@ class ModTeamspeak3ViewerHelper
                 return $e->getMessage() . ' (' . $e->getCode() . ')';
             }
 
-            $images = JUri::base(true) . '/media/teamspeak3/images';
+            $images = JUri::base(true) . '/media/mod_teamspeak3/images';
 
             $data = new stdClass;
             $data->viewer = $ts3->getViewer(new TeamSpeak3_Viewer_Html($images . '/', $images . '/flags/', 'data:image'));
