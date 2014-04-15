@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die;
 
-class mod_teamspeak3_viewerInstallerScript
+class mod_teamspeak3InstallerScript
 {
     public function preflight()
     {

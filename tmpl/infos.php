@@ -11,15 +11,15 @@ defined('_JEXEC') or die;
 
 $infos = $params->get('infos');
 ?>
-<div class="mod_teamspeak3_viewer infos">
+<div class="mod_teamspeak3 infos">
     <?php if (!empty($infos)) : ?>
         <dl>
             <?php foreach ($infos as $info) : ?>
-                <dt><?php echo JText::_('MOD_TEAMSPEAK3_VIEWER_INFOS_' . strtoupper($info)); ?></dt>
+                <dt><?php echo JText::_('MOD_TEAMSPEAK3_INFOS_' . strtoupper($info)); ?></dt>
                 <dd><?php echo ModTeamspeak3ViewerHelper::infoString($data->infos[$info], $info); ?></dd>
             <?php endforeach; ?>
         </dl>
     <?php else: ?>
-        <p><?php echo JText::_('MOD_TEAMSPEAK3_VIEWER_INFOS_NOTHING_SELECTED'); ?></p>
+        <p><?php echo JText::_('MOD_TEAMSPEAK3_INFOS_NOTHING_SELECTED'); ?></p>
     <?php endif; ?>
 </div>

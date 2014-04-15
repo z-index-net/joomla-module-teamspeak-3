@@ -10,13 +10,13 @@
 defined('_JEXEC') or die;
 
 if ($params->get('tooltip', 1)) {
-    JHtml::_('behavior.tooltip', '.mod_teamspeak3_viewer .corpus');
+    JHtml::_('behavior.tooltip', '.mod_teamspeak3 .corpus');
 }
 
-JFactory::getDocument()->addStyleSheet(JUri::base(true) . '/media/teamspeak3/css/viewer.css');
-JFactory::getDocument()->addScript(JUri::base(true) . '/media/teamspeak3/js/viewer.js');
+JFactory::getDocument()->addStyleSheet(JUri::base(true) . '/media/mod_teamspeak3/css/viewer.css');
+JFactory::getDocument()->addScript(JUri::base(true) . '/media/mod_teamspeak3/js/viewer.js');
 ?>
-    <div class="mod_teamspeak3_viewer viewer">
+    <div class="mod_teamspeak3 viewer">
         <?php echo $data->viewer; ?>
     </div>
 <?php

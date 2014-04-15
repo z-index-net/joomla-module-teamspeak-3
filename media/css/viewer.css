@@ -1,22 +1,22 @@
-.mod_teamspeak3_viewer {
+.mod_teamspeak3 {
     overflow: auto;
 }
 
-.mod_teamspeak3_viewer table {
+.mod_teamspeak3 table {
 }
 
-.mod_teamspeak3_viewer table td {
+.mod_teamspeak3 table td {
 }
 
-.mod_teamspeak3_viewer table .prefix {
+.mod_teamspeak3 table .prefix {
 }
 
-.mod_teamspeak3_viewer table .corpus {
+.mod_teamspeak3 table .corpus {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.mod_teamspeak3_viewer table .suffix {
+.mod_teamspeak3 table .suffix {
     text-align: right;
 }

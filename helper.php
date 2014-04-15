@@ -63,6 +63,10 @@ class ModTeamspeak3ViewerHelper
                 return JHtml::_('date', $str, JText::_('DATE_FORMAT_LC2'));
                 break;
 
+            case 'virtualserver_flag_password':
+                return ($str == 1) ? JText::_('JYES') : JText::_('JNO');
+                break;
+
             default:
                 return $str;
                 break;
