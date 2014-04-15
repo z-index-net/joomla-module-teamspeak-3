@@ -15,7 +15,9 @@
         <filename>helper.php</filename>
     </files>
     <media folder="media" destination="teamspeak3">
+        <folder>css</folder>
         <folder>images</folder>
+        <folder>js</folder>
     </media>
     <scriptfile>script.installer.php</scriptfile>
     <languages folder="language">
@@ -31,15 +33,67 @@
         <fields name="params">
             <fieldset name="basic">
                 <field name="host" type="text" default="127.0.0.1" required="true" label="MOD_TEAMSPEAK3_VIEWER_HOST_LABEL" description="MOD_TEAMSPEAK3_VIEWER_HOST_DESC" />
-                <field name="query_port" type="text" default="10011" filter="integer" required="true" label="MOD_TEAMSPEAK3_VIEWER_QUERY_PORT_LABEL" description="MOD_TEAMSPEAK3_VIEWER_QUERY_PORT_DESC" />
                 <field name="udp_port" type="text" default="9987" filter="integer" required="true" label="MOD_TEAMSPEAK3_VIEWER_UDP_PORT_LABEL" description="MOD_TEAMSPEAK3_VIEWER_UDP_PORT_DESC" />
+                <field name="query_port" type="text" default="10011" filter="integer" required="true" label="MOD_TEAMSPEAK3_VIEWER_QUERY_PORT_LABEL" description="MOD_TEAMSPEAK3_VIEWER_QUERY_PORT_DESC" />
                 <field name="server_login" type="text" required="true" label="MOD_TEAMSPEAK3_VIEWER_SERVER_LOGIN_LABEL" description="MOD_TEAMSPEAK3_VIEWER_SERVER_LOGIN_DESC" />
                 <field name="server_password" type="password" required="true" label="MOD_TEAMSPEAK3_VIEWER_SERVER_PASSWORD_LABEL" description="MOD_TEAMSPEAK3_VIEWER_SERVER_PASSWORD_DESC" />
-                <field name="connection_timeout" type="text" default="5" filter="integer" required="true" label="MOD_TEAMSPEAK3_VIEWER_CONNECTION_TIMEOUT_LABEL" description="MOD_TEAMSPEAK3_VIEWER_CONNECTION_TIMEOUT_DESC" />
+                <field name="connection_timeout" type="text" default="10" filter="integer" required="true" label="MOD_TEAMSPEAK3_VIEWER_CONNECTION_TIMEOUT_LABEL" description="MOD_TEAMSPEAK3_VIEWER_CONNECTION_TIMEOUT_DESC" />
                 <field name="cache_time" type="text" default="5" filter="integer" required="true" label="MOD_TEAMSPEAK3_VIEWER_CACHE_TIME_LABEL" description="MOD_TEAMSPEAK3_VIEWER_CACHE_TIME_DESC" />
             </fieldset>
+            <fieldset name="layout" label="MOD_TEAMSPEAK3_VIEWER_FIELDSET_LAYOUT_LABEL">
+                <field name="layout" default="viewer" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+                <field name="viewer_infos" type="radio" class="btn-group" default="0" label="MOD_TEAMSPEAK3_VIEWER_VIEWER_INFOS_LABEL" description="MOD_TEAMSPEAK3_VIEWER_VIEWER_INFOS_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="tooltip" type="radio" class="btn-group" default="1" label="MOD_TEAMSPEAK3_VIEWER_TOOLTIP_LABEL" description="MOD_TEAMSPEAK3_VIEWER_TOOLTIP_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="no_query_clients" type="radio" class="btn-group" default="1" label="MOD_TEAMSPEAK3_VIEWER_NO_QUERY_CLIENTS_LABEL" description="MOD_TEAMSPEAK3_VIEWER_NO_QUERY_CLIENTS_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="infos" type="checkboxes" class="checkbox" label="MOD_TEAMSPEAK3_VIEWER_INFOS_LABEL" description="MOD_TEAMSPEAK3_VIEWER_INFOS_DESC">
+                    <option value="virtualserver_platform">MOD_TEAMSPEAK3_VIEWER_INFOS_VIRTUALSERVER_PLATFORM</option>
+                    <option value="virtualserver_version">MOD_TEAMSPEAK3_VIEWER_INFOS_VIRTUALSERVER_VERSION</option>
+                    <option value="virtualserver_maxclients">MOD_TEAMSPEAK3_VIEWER_INFOS_VIRTUALSERVER_MAXCLIENTS</option>
+                    <option value="virtualserver_clientsonline">MOD_TEAMSPEAK3_VIEWER_INFOS_VIRTUALSERVER_CLIENTSONLINE</option>
+                    <option value="virtualserver_channelsonline">MOD_TEAMSPEAK3_VIEWER_INFOS_VIRTUALSERVER_CHANNELSONLINE</option>
+                    <option value="virtualserver_created">MOD_TEAMSPEAK3_VIEWER_INFOS_VIRTUALSERVER_CREATED</option>
+
+                    <option value="connection_filetransfer_bandwidth_sent">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_FILETRANSFER_BANDWIDTH_SENT</option>
+                    <option value="connection_filetransfer_bandwidth_received">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_FILETRANSFER_BANDWIDTH_RECEIVED</option>
+
+                    <option value="connection_filetransfer_bytes_sent_total">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_FILETRANSFER_BYTES_SENT_TOTAL</option>
+                    <option value="connection_filetransfer_bytes_received_total">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_FILETRANSFER_BYTES_RECEIVED_TOTAL</option>
+
+                    <option value="connection_packets_sent_speech">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_PACKETS_SENT_SPEECH</option>
+                    <option value="connection_packets_received_speech">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_PACKETS_RECEIVED_SPEECH</option>
+
+                    <option value="connection_bytes_sent_speech">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_BYTES_SENT_SPEECH</option>
+                    <option value="connection_bytes_received_speech">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_BYTES_RECEIVED_SPEECH</option>
+
+                    <option value="connection_packets_sent_keepalive">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_PACKETS_SENT_KEEPALIVE</option>
+                    <option value="connection_packets_received_keepalive">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_PACKETS_RECEIVED_KEEPALIVE</option>
+
+                    <option value="connection_bytes_sent_keepalive">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_BYTES_SENT_KEEPALIVE</option>
+                    <option value="connection_bytes_received_keepalive">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_BYTES_RECEIVED_KEEPALIVE</option>
+
+                    <option value="connection_packets_sent_control">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_PACKETS_SENT_CONTROL</option>
+                    <option value="connection_packets_received_control">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_PACKETS_RECEIVED_CONTROL</option>
+
+                    <option value="connection_bytes_sent_control">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_BYTES_SENT_CONTROL</option>
+                    <option value="connection_bytes_received_control">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_BYTES_RECEIVED_CONTROL</option>
+
+                    <option value="connection_packets_sent_total">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_PACKETS_SENT_TOTAL</option>
+                    <option value="connection_packets_received_total">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_PACKETS_RECEIVED_TOTAL</option>
+
+                    <option value="connection_bytes_sent_total">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_BYTES_SENT_TOTAL</option>
+                    <option value="connection_bytes_received_total">MOD_TEAMSPEAK3_VIEWER_INFOS_CONNECTION_BYTES_RECEIVED_TOTAL</option>
+                </field>
+            </fieldset>
             <fieldset name="advanced">
-                <field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
                 <field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
             </fieldset>
         </fields>

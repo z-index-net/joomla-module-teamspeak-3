@@ -24,8 +24,10 @@ class ModTeamspeak3ViewerHelper
 
         $query = array();
         $query['server_port'] = $params->get('udp_port');
-        $query['no_query_clients'] = 1;
         $query['timeout'] = $params->get('connection_timeout', 10);
+        if ($params->get('no_query_clients', 1)) {
+            $query['no_query_clients'] = 1;
+        }
 
         $query = http_build_query($query);
 
@@ -33,36 +35,37 @@ class ModTeamspeak3ViewerHelper
 
         $key = md5($url);
 
-        if (!$ts3 = $cache->get($key)) {
-            $ts3 = TeamSpeak3::factory($url);
+        if (!$data = $cache->get($key)) {
             try {
+                $ts3 = TeamSpeak3::factory($url);
             } catch (TeamSpeak3_Exception $e) {
                 return $e->getMessage() . ' (' . $e->getCode() . ')';
             }
-            $cache->store($ts3, $key);
-        }
 
-        $dataKey = md5($key . $params->get('layout'));
+            $images = JUri::base(true) . '/media/teamspeak3/images';
 
-        if (!$data = $cache->get($dataKey)) {
-            switch ($params->get('layout')) {
-                default:
-                case 'default':
-                    $images = JUri::base(true) . '/media/teamspeak3/images';
+            $data = new stdClass;
+            $data->viewer = $ts3->getViewer(new TeamSpeak3_Viewer_Html($images . '/', $images . '/flags/', 'data:image'));
+            $data->infos = $ts3->getInfo(true, true);
 
-                    $data = new stdClass;
-                    $data->viewer = $ts3->getViewer(new TeamSpeak3_Viewer_Html($images . '/', $images . '/flags/', 'data:image'));
-
-                    break;
-
-                case 'stats':
-                    $data = $ts3->getInfo(true, true);
-
-                    break;
-            }
-            $cache->store($data, $dataKey);
+            $cache->store($data, $key);
         }
 
         return $data;
+    }
+
+    public static function infoString($str, $type)
+    {
+        $str = (string)$str;
+
+        switch ($type) {
+            case 'virtualserver_created':
+                return JHtml::_('date', $str, JText::_('DATE_FORMAT_LC2'));
+                break;
+
+            default:
+                return $str;
+                break;
+        }
     }
 }
