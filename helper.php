@@ -23,7 +23,7 @@ class ModTeamspeak3ViewerHelper
 
         $cache = JFactory::getCache('teamspeak3', 'output');
         $cache->setCaching(1);
-        $cache->setLifeTime($params->get('cache_time', 5));
+        $cache->setLifeTime($params->get('cache_time', 5) * 60); // TODO seconds? minutes?
 
         $query = array();
         $query['server_port'] = $params->get('server_port');
@@ -183,11 +183,13 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
     {
         $name = parent::getCorpusName();
 
-        if ($this->params->get('join_links')) {
+        if ($this->params->get('join_links') == 'all') {
             if ($this->currObj instanceof TeamSpeak3_Node_Channel && !$this->currObj->isSpacer()) {
                 $name = JHtml::_('link', $this->linkPrefix . '&amp;channel=' . rawurlencode((string)$this->currObj->getPathway()), $name, array('class' => 'join'));
             }
+        }
 
+        if ($this->params->get('join_links') == 'server' || $this->params->get('join_links') == 'all') {
             if ($this->currObj instanceof TeamSpeak3_Node_Server) {
                 $name = JHtml::_('link', $this->linkPrefix, $name, array('class' => 'join'));
             }

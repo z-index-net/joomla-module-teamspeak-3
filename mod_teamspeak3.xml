@@ -47,7 +47,7 @@
                     <option value="0">JNO</option>
                 </field>
                 <field name="avatars" type="radio" class="btn-group" default="0" label="MOD_TEAMSPEAK3_AVATARS_LABEL" description="MOD_TEAMSPEAK3_AVATARS_DESC">
-                <option value="1">JYES</option>
+                    <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
                 <field name="no_query_clients" type="radio" class="btn-group" default="1" label="MOD_TEAMSPEAK3_NO_QUERY_CLIENTS_LABEL" description="MOD_TEAMSPEAK3_NO_QUERY_CLIENTS_DESC">
@@ -96,7 +96,8 @@
             </fieldset>
             <fieldset name="join" label="MOD_TEAMSPEAK3_FIELDSET_JOIN_LABEL">
                 <field name="join_links" type="radio" class="btn-group" default="0" label="MOD_TEAMSPEAK3_JOIN_LINKS_LABEL" description="MOD_TEAMSPEAK3_JOIN_LINKS_DESC">
-                    <option value="1">JYES</option>
+                    <option value="server">MOD_TEAMSPEAK3_JOIN_LINKS_SERVER</option>
+                    <option value="all">MOD_TEAMSPEAK3_JOIN_LINKS_ALL</option>
                     <option value="0">JNO</option>
                 </field>
                 <field name="join_password" type="password" default="" label="MOD_TEAMSPEAK3_JOIN_PASSWORD_LABEL" description="MOD_TEAMSPEAK3_JOIN_PASSWORD_DESC" />
