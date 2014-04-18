@@ -96,6 +96,8 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
 
     protected $linkPrefix;
 
+    protected $images = '/media/mod_teamspeak3/images/';
+
     public function __construct(JRegistry &$params, stdClass &$module)
     {
         $this->params = $params;
@@ -109,31 +111,19 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
                 $this->linkPrefix .= '&amp;password=' . $this->params->get('join_password');
             }
 
-            $user = JFactory::getUser();
-
-            if ($user->guest && $this->params->get('join_nickname_guest')) {
-                $this->linkPrefix .= '&amp;nickname=' . $this->params->get('join_nickname_guest');
-            }
-
-            if ($user->id) {
-                $this->linkPrefix .= '&amp;nickname=' . rawurlencode($user->{$this->params->get('join_registered_nickname_map', 'name')});
+            if ($this->params->get('join_nickname')) {
+                $this->linkPrefix .= '&amp;nickname=' . rawurlencode($this->params->get('join_nickname'));
             }
         }
 
-        $images = JUri::base(true) . '/media/mod_teamspeak3/images';
-
-        parent::__construct($images . '/', $images . '/flags/', 'data:image');
+        parent::__construct(JUri::base(true) . $this->images, JUri::base(true) . $this->images . 'flags/', 'data:image');
     }
 
     public function fetchObject(TeamSpeak3_Node_Abstract $node, array $siblings = array())
     {
         $obj = parent::fetchObject($node, $siblings);
 
-        if ($this->HideCurChannel()) {
-            return '';
-        }
-
-        if ($this->HideCurCLient()) {
+        if ($this->hideNode()) {
             return '';
         }
 
@@ -145,7 +135,7 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
         return $obj;
     }
 
-    private function HideCurChannel()
+    private function hideNode()
     {
         if ($this->currObj instanceof TeamSpeak3_Node_Channel) {
             if ($this->params->get('channel_hide')) {
@@ -155,10 +145,7 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
                 return in_array($this->currObj->getId(), $channel_hide);
             }
         }
-    }
 
-    private function HideCurCLient()
-    {
         if ($this->currObj instanceof TeamSpeak3_Node_Client) {
             if ($this->params->get('client_hide')) {
                 $client_hide = explode(',', $this->params->get('client_hide'));
@@ -167,6 +154,29 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
                 return in_array($this->currObj->getId(), $client_hide);
             }
         }
+
+        return false;
+    }
+
+    protected function getCorpusTitle()
+    {
+        $title = parent::getCorpusTitle();
+
+        if ($this->currObj instanceof TeamSpeak3_Node_Channel) {
+            $topic = $this->currObj->getProperty('channel_topic');
+
+            if (!empty($topic)) {
+                $title = 'Topic: ' . $topic . ' | ' . $title;
+            }
+        }
+
+        if ($this->currObj instanceof TeamSpeak3_Node_CLient && $this->params->get('avatars')) {
+            $title .= $this->getClientAvatar();
+        }
+
+        $title = JString::str_ireplace('|', '<br/>', $title);
+
+        return htmlspecialchars($title);
     }
 
     protected function getCorpusName()
@@ -184,5 +194,24 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
         }
 
         return $name;
+    }
+
+    protected function getClientAvatar()
+    {
+        if ($this->currObj['client_flag_avatar'] == 0) return;
+
+        $avatar_name = $this->currObj['client_base64HashClientUID'] . '.jpg';
+
+        $path = JPATH_ROOT . $this->images . 'avatars/';
+
+        if (!JFile::exists($path . $avatar_name)) {
+            JFile::write($path . $avatar_name, $this->currObj->avatarDownload());
+        }
+
+        if (JFile::exists($path . $avatar_name)) {
+            return JHtml::_('image', JUri::root() . $this->images . 'avatars/' . $avatar_name, '');;
+        }
+
+        return '';
     }
 }

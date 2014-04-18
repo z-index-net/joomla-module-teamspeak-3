@@ -9,9 +9,7 @@
 
 defined('_JEXEC') or die;
 
-if ($params->get('tooltip', 1)) {
-    JHtml::_('behavior.tooltip', '.ts3_viewer .corpus');
-}
+JHtml::_('behavior.tooltip', '.ts3_viewer .corpus');
 
 JFactory::getDocument()->addStyleSheet(JUri::base(true) . '/media/mod_teamspeak3/css/viewer.css');
 JFactory::getDocument()->addScript(JUri::base(true) . '/media/mod_teamspeak3/js/viewer.js');

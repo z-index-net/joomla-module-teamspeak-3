@@ -46,8 +46,8 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
-                <field name="tooltip" type="radio" class="btn-group" default="1" label="MOD_TEAMSPEAK3_TOOLTIP_LABEL" description="MOD_TEAMSPEAK3_TOOLTIP_DESC">
-                    <option value="1">JYES</option>
+                <field name="avatars" type="radio" class="btn-group" default="0" label="MOD_TEAMSPEAK3_AVATARS_LABEL" description="MOD_TEAMSPEAK3_AVATARS_DESC">
+                <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
                 <field name="no_query_clients" type="radio" class="btn-group" default="1" label="MOD_TEAMSPEAK3_NO_QUERY_CLIENTS_LABEL" description="MOD_TEAMSPEAK3_NO_QUERY_CLIENTS_DESC">
@@ -100,11 +100,7 @@
                     <option value="0">JNO</option>
                 </field>
                 <field name="join_password" type="password" default="" label="MOD_TEAMSPEAK3_JOIN_PASSWORD_LABEL" description="MOD_TEAMSPEAK3_JOIN_PASSWORD_DESC" />
-                <field name="join_nickname_guest" type="text" default="" label="MOD_TEAMSPEAK3_JOIN_NICKNAME_GUEST_LABEL" description="MOD_TEAMSPEAK3_JOIN_NICKNAME_GUEST_DESC" />
-                <field name="join_registered_nickname_map" type="radio" class="btn-group" default="name" label="MOD_TEAMSPEAK3_JOIN_REGISTERED_NICKNAME_MAP_LABEL" description="MOD_TEAMSPEAK3_JOIN_REGISTERED_NICKNAME_MAP_DESC">
-                    <option value="name">Name</option>
-                    <option value="username">JGLOBAL_USERNAME</option>
-                </field>
+                <field name="join_nickname" type="text" default="" label="MOD_TEAMSPEAK3_JOIN_NICKNAME_LABEL" description="MOD_TEAMSPEAK3_JOIN_NICKNAME_DESC" />
             </fieldset>
             <fieldset name="other" label="MOD_TEAMSPEAK3_FIELDSET_OTHER_LABEL">
                 <field name="channel_id" type="text" default="" filter="integer" label="MOD_TEAMSPEAK3_CHANNEL_ID_LABEL" description="MOD_TEAMSPEAK3_CHANNEL_ID_DESC" />
