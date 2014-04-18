@@ -185,11 +185,11 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
 
         if ($this->params->get('join_links')) {
             if ($this->currObj instanceof TeamSpeak3_Node_Channel && !$this->currObj->isSpacer()) {
-                $name = JHtml::_('link', $this->linkPrefix . '&amp;channel=' . rawurlencode((string)$this->currObj->getPathway()), $name);
+                $name = JHtml::_('link', $this->linkPrefix . '&amp;channel=' . rawurlencode((string)$this->currObj->getPathway()), $name, array('class' => 'join'));
             }
 
             if ($this->currObj instanceof TeamSpeak3_Node_Server) {
-                $name = JHtml::_('link', $this->linkPrefix, $name);
+                $name = JHtml::_('link', $this->linkPrefix, $name, array('class' => 'join'));
             }
         }
 
@@ -209,7 +209,7 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
         }
 
         if (JFile::exists($path . $avatar_name)) {
-            return JHtml::_('image', JUri::root() . $this->images . 'avatars/' . $avatar_name, '');;
+            return JHtml::_('image', JUri::root() . $this->images . 'avatars/' . $avatar_name, '', array('class' => 'avatar'));
         }
 
         return '';
