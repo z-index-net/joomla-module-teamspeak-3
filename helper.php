@@ -5,7 +5,6 @@
  * @link       http://www.z-index.net
  * @copyright  (c) 2014 Branko Wilhelm
  * @license    GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
- * @see        http://addons.teamspeak.com/directory/addon/integration/TeamSpeak-3-PHP-Framework.html
  */
 
 defined('_JEXEC') or die;
@@ -91,8 +90,6 @@ class ModTeamspeak3ViewerHelper
 
 class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
 {
-    protected $pattern = '<table id="%0" class="%1" summary="%2"><tr class="%3"><td class="%4">%5</td><td class="%6" title="%7">%8 <span>%9</span></td><td class="%10">%11%12</td></tr></table>';
-
     protected $params;
 
     protected $module;
@@ -105,10 +102,22 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
 
         $this->module = $module;
 
-        $this->linkPrefix = 'ts3server://' . $this->params->get('server_host') . '?port=' . $this->params->get('server_port');
+        if ($this->params->get('join_links')) {
+            $this->linkPrefix = 'ts3server://' . $this->params->get('server_host') . '?port=' . $this->params->get('server_port');
 
-        if ($this->params->get('server_password')) {
-            $this->linkPrefix .= '&amp;=password=' . $this->params->get('server_password');
+            if ($this->params->get('join_password')) {
+                $this->linkPrefix .= '&amp;password=' . $this->params->get('join_password');
+            }
+
+            $user = JFactory::getUser();
+
+            if ($user->guest && $this->params->get('join_nickname_guest')) {
+                $this->linkPrefix .= '&amp;nickname=' . $this->params->get('join_nickname_guest');
+            }
+
+            if ($user->id) {
+                $this->linkPrefix .= '&amp;nickname=' . rawurlencode($user->{$this->params->get('join_registered_nickname_map', 'name')});
+            }
         }
 
         $images = JUri::base(true) . '/media/mod_teamspeak3/images';

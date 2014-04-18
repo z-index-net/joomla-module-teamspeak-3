@@ -34,7 +34,6 @@
             <fieldset name="basic">
                 <field name="server_host" type="text" default="127.0.0.1" required="true" label="MOD_TEAMSPEAK3_SERVER_HOST_LABEL" description="MOD_TEAMSPEAK3_SERVER_HOST_DESC" />
                 <field name="server_port" type="text" default="9987" filter="integer" required="true" label="MOD_TEAMSPEAK3_SERVER_PORT_LABEL" description="MOD_TEAMSPEAK3_SERVER_PORT_DESC" />
-                <field name="server_password" type="password" default="" label="MOD_TEAMSPEAK3_SERVER_PASSWORD_LABEL" description="MOD_TEAMSPEAK3_SERVER_PASSWORD_DESC" />
                 <field name="query_port" type="text" default="10011" filter="integer" required="true" label="MOD_TEAMSPEAK3_QUERY_PORT_LABEL" description="MOD_TEAMSPEAK3_QUERY_PORT_DESC" />
                 <field name="query_login" type="text" required="true" label="MOD_TEAMSPEAK3_QUERY_LOGIN_LABEL" description="MOD_TEAMSPEAK3_QUERY_LOGIN_DESC" />
                 <field name="query_password" type="password" required="true" label="MOD_TEAMSPEAK3_QUERY_PASSWORD_LABEL" description="MOD_TEAMSPEAK3_QUERY_PASSWORD_DESC" />
@@ -95,14 +94,22 @@
                     <option value="connection_bytes_received_total">MOD_TEAMSPEAK3_INFOS_CONNECTION_BYTES_RECEIVED_TOTAL</option>
                 </field>
             </fieldset>
-            <fieldset name="other" label="MOD_TEAMSPEAK3_FIELDSET_OTHER_LABEL">
-                <field name="channel_id" type="text" default="" filter="integer" label="MOD_TEAMSPEAK3_CHANNEL_ID_LABEL" description="MOD_TEAMSPEAK3_CHANNEL_ID_DESC" />
-                <field name="channel_hide" type="text" default="" label="MOD_TEAMSPEAK3_CHANNEL_HIDE_LABEL" description="MOD_TEAMSPEAK3_CHANNEL_HIDE_DESC" />
-                <field name="client_hide" type="text" default="" label="MOD_TEAMSPEAK3_CLIENT_HIDE_LABEL" description="MOD_TEAMSPEAK3_CLIENT_HIDE_DESC" />
+            <fieldset name="join" label="MOD_TEAMSPEAK3_FIELDSET_JOIN_LABEL">
                 <field name="join_links" type="radio" class="btn-group" default="0" label="MOD_TEAMSPEAK3_JOIN_LINKS_LABEL" description="MOD_TEAMSPEAK3_JOIN_LINKS_DESC">
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
+                <field name="join_password" type="password" default="" label="MOD_TEAMSPEAK3_JOIN_PASSWORD_LABEL" description="MOD_TEAMSPEAK3_JOIN_PASSWORD_DESC" />
+                <field name="join_nickname_guest" type="text" default="" label="MOD_TEAMSPEAK3_JOIN_NICKNAME_GUEST_LABEL" description="MOD_TEAMSPEAK3_JOIN_NICKNAME_GUEST_DESC" />
+                <field name="join_registered_nickname_map" type="radio" class="btn-group" default="name" label="MOD_TEAMSPEAK3_JOIN_REGISTERED_NICKNAME_MAP_LABEL" description="MOD_TEAMSPEAK3_JOIN_REGISTERED_NICKNAME_MAP_DESC">
+                    <option value="name">Name</option>
+                    <option value="username">JGLOBAL_USERNAME</option>
+                </field>
+            </fieldset>
+            <fieldset name="other" label="MOD_TEAMSPEAK3_FIELDSET_OTHER_LABEL">
+                <field name="channel_id" type="text" default="" filter="integer" label="MOD_TEAMSPEAK3_CHANNEL_ID_LABEL" description="MOD_TEAMSPEAK3_CHANNEL_ID_DESC" />
+                <field name="channel_hide" type="text" default="" label="MOD_TEAMSPEAK3_CHANNEL_HIDE_LABEL" description="MOD_TEAMSPEAK3_CHANNEL_HIDE_DESC" />
+                <field name="client_hide" type="text" default="" label="MOD_TEAMSPEAK3_CLIENT_HIDE_LABEL" description="MOD_TEAMSPEAK3_CLIENT_HIDE_DESC" />
                 <field name="module_title" type="radio" class="btn-group" default="0" label="MOD_TEAMSPEAK3_MODULE_TITLE_LABEL" description="MOD_TEAMSPEAK3_MODULE_TITLE_DESC">
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
