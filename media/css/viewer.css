@@ -21,14 +21,6 @@
     text-align: right;
 }
 
-.mod_teamspeak3.tip-wrap {
-    max-width: none;
-}
-
-.mod_teamspeak3.tip-wrap .tip-title {
-    white-space: nowrap;
-}
-
 .mod_teamspeak3.tip-wrap .avatar {
     max-width: 100%;
 }
