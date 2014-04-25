@@ -210,9 +210,7 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
 
         $path = JPATH_ROOT . $this->images . 'avatars/';
 
-        $this->deleteOutdatedAvatars($path);
-
-        JLoader::import('joomla.filesystem.file');
+        $this->deleteExpiredAvatars($path);
 
         if (!JFile::exists($path . $avatar_name)) {
             JFile::write($path . $avatar_name, $this->currObj->avatarDownload());
@@ -225,9 +223,10 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
         return '';
     }
 
-    protected function deleteOutdatedAvatars($path)
+    protected function deleteExpiredAvatars($path)
     {
         JLoader::import('joomla.filesystem.folder');
+        JLoader::import('joomla.filesystem.file');
 
         $files = JFolder::files($path);
 
@@ -235,10 +234,10 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
             return;
         }
 
-        $outdated = time() - (60 * 60 * (int)$this->params->get('avatar_expired', 48));
+        $expired = time() - (60 * 60 * (int)$this->params->get('avatar_expired', 48));
 
         foreach ($files as $file) {
-            if (filemtime($path . $file) <= $outdated) {
+            if (filemtime($path . $file) <= $expired) {
                 JFile::delete($path . $file);
             }
         }
