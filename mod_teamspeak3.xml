@@ -111,6 +111,7 @@
                     <option value="1">JYES</option>
                     <option value="0">JNO</option>
                 </field>
+                <field name="avatar_expired" type="text" default="48" filter="integer" label="MOD_TEAMSPEAK3_AVATAR_EXPIRED_LABEL" description="MOD_TEAMSPEAK3_AVATAR_EXPIRED_DESC" />
             </fieldset>
             <fieldset name="advanced">
                 <field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />

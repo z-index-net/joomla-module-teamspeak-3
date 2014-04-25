@@ -2,7 +2,8 @@ if (typeof jQuery != 'undefined') {
     jQuery(document).ready(function ($) {
         $('.mod_teamspeak3 .join').click(function (e) {
             e.preventDefault();
-            var name = prompt('Nickname');
+            var nickname = $(this).closest('.viewer').find('.nickname').html();
+            var name = prompt('Nickname', nickname);
             if (name) {
                 var uri = $(this).attr('href');
                 window.location.href = updateQueryStringParameter(uri, 'nickname', name);

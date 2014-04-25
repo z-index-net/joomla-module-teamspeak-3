@@ -15,6 +15,7 @@ JFactory::getDocument()->addStyleSheet(JUri::base(true) . '/media/mod_teamspeak3
 JFactory::getDocument()->addScript(JUri::base(true) . '/media/mod_teamspeak3/js/viewer.js');
 ?>
     <div class="mod_teamspeak3 viewer">
+        <div class="nickname"><?php echo JFactory::getUser()->guest ? $params->get('join_nickname') : JFactory::getUser()->get('name'); ?></div>
         <?php echo $data->viewer; ?>
     </div>
 <?php

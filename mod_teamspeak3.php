@@ -9,11 +9,11 @@
 
 defined('_JEXEC') or die;
 
-JLoader::register('ModTeamspeak3ViewerHelper', dirname(__FILE__) . '/helper.php');
+JLoader::register('ModTeamspeak3Helper', dirname(__FILE__) . '/helper.php');
 
 $params->set('layout', $params->get('layout', 'viewer'));
 
-$data = ModTeamspeak3ViewerHelper::getData($params, $module);
+$data = ModTeamspeak3Helper::getData($params, $module);
 
 if (is_string($data)) {
     echo $data;

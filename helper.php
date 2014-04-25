@@ -13,7 +13,7 @@ JLoader::register('TeamSpeak3', JPATH_LIBRARIES . '/TeamSpeak3/TeamSpeak3.php');
 
 TeamSpeak3::init();
 
-class ModTeamspeak3ViewerHelper
+class ModTeamspeak3Helper
 {
     public static function getData(JRegistry &$params, stdClass &$module)
     {
@@ -23,7 +23,7 @@ class ModTeamspeak3ViewerHelper
 
         $cache = JFactory::getCache('teamspeak3', 'output');
         $cache->setCaching(1);
-        $cache->setLifeTime($params->get('cache_time', 5) * 60); // TODO seconds? minutes?
+        $cache->setLifeTime($params->get('cache_time', 5) * 60);
 
         $query = array();
         $query['server_port'] = $params->get('server_port');
@@ -147,6 +147,10 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
         }
 
         if ($this->currObj instanceof TeamSpeak3_Node_Client) {
+            if ($this->params->get('client_hide') == -1) {
+                return true;
+            }
+
             if ($this->params->get('client_hide')) {
                 $client_hide = explode(',', $this->params->get('client_hide'));
                 JArrayHelper::toInteger($client_hide);
@@ -206,6 +210,10 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
 
         $path = JPATH_ROOT . $this->images . 'avatars/';
 
+        $this->deleteOutdatedAvatars($path);
+
+        JLoader::import('joomla.filesystem.file');
+
         if (!JFile::exists($path . $avatar_name)) {
             JFile::write($path . $avatar_name, $this->currObj->avatarDownload());
         }
@@ -215,5 +223,24 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
         }
 
         return '';
+    }
+
+    protected function deleteOutdatedAvatars($path)
+    {
+        JLoader::import('joomla.filesystem.folder');
+
+        $files = JFolder::files($path);
+
+        if (empty($files)) {
+            return;
+        }
+
+        $outdated = time() - (60 * 60 * (int)$this->params->get('avatar_expired', 48));
+
+        foreach ($files as $file) {
+            if (filemtime($path . $file) <= $outdated) {
+                JFile::delete($path . $file);
+            }
+        }
     }
 }

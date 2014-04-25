@@ -16,7 +16,7 @@ $infos = $params->get('infos');
         <dl>
             <?php foreach ($infos as $info) : ?>
                 <dt><?php echo JText::_('MOD_TEAMSPEAK3_INFOS_' . strtoupper($info)); ?></dt>
-                <dd><?php echo ModTeamspeak3ViewerHelper::infoString($data->infos[$info], $info); ?></dd>
+                <dd><?php echo ModTeamspeak3Helper::infoString($data->infos[$info], $info); ?></dd>
             <?php endforeach; ?>
         </dl>
     <?php else: ?>
