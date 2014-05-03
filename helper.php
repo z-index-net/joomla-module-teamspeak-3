@@ -62,7 +62,13 @@ class ModTeamspeak3Helper
                 $data->viewer = $ts3->getViewer($html);
             }
 
+            $data->title = $html->getModuleTitle();
+
             $cache->store($data, $key);
+        }
+
+        if ($params->get('module_title')) {
+            $module->title = $data->title;
         }
 
         return $data;
@@ -94,6 +100,8 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
 
     protected $module;
 
+    protected $title;
+
     protected $linkPrefix;
 
     protected $images = '/media/mod_teamspeak3/images/';
@@ -119,6 +127,11 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
         parent::__construct(JUri::base(true) . $this->images, JUri::base(true) . $this->images . 'flags/', 'data:image');
     }
 
+    public function getModuleTitle()
+    {
+        return $this->title;
+    }
+
     public function fetchObject(TeamSpeak3_Node_Abstract $node, array $siblings = array())
     {
         $obj = parent::fetchObject($node, $siblings);
@@ -128,7 +141,7 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
         }
 
         if ($this->params->get('module_title') && $this->currObj instanceof TeamSpeak3_Node_Server) {
-            $this->module->title = $obj;
+            $this->title = $obj;
             return '';
         }
 
