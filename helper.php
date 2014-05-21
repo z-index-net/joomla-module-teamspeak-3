@@ -41,30 +41,31 @@ class ModTeamspeak3Helper
         if (!$data = $cache->get($key)) {
             try {
                 $ts3 = TeamSpeak3::factory($url);
+
+                $html = new TeamSpeak3_Viewer_Html_Joomla($params, $module);
+
+                $data = new stdClass;
+                $data->infos = $ts3->getInfo(true, true);
+
+                if ($params->get('channel_id')) {
+                    try {
+                        $channel = $ts3->channelGetById($params->get('channel_id'));
+                    } catch (TeamSpeak3_Exception $e) {
+                        return $e->getMessage() . ' (' . $e->getCode() . ')';
+                    }
+
+                    $data->viewer = $channel->getViewer($html);
+                } else {
+                    $data->viewer = $ts3->getViewer($html);
+                }
+
+                $data->title = $html->getModuleTitle();
+
+                $cache->store($data, $key);
+
             } catch (TeamSpeak3_Exception $e) {
                 return $e->getMessage() . ' (' . $e->getCode() . ')';
             }
-
-            $html = new TeamSpeak3_Viewer_Html_Joomla($params, $module);
-
-            $data = new stdClass;
-            $data->infos = $ts3->getInfo(true, true);
-
-            if ($params->get('channel_id')) {
-                try {
-                    $channel = $ts3->channelGetById($params->get('channel_id'));
-                } catch (TeamSpeak3_Exception $e) {
-                    return $e->getMessage() . ' (' . $e->getCode() . ')';
-                }
-
-                $data->viewer = $channel->getViewer($html);
-            } else {
-                $data->viewer = $ts3->getViewer($html);
-            }
-
-            $data->title = $html->getModuleTitle();
-
-            $cache->store($data, $key);
         }
 
         if ($params->get('module_title')) {
@@ -74,7 +75,8 @@ class ModTeamspeak3Helper
         return $data;
     }
 
-    public static function infoString($str, $type)
+    public
+    static function infoString($str, $type)
     {
         $str = (string)$str;
 
