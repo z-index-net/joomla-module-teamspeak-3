@@ -75,8 +75,7 @@ class ModTeamspeak3Helper
         return $data;
     }
 
-    public
-    static function infoString($str, $type)
+    public static function infoString($str, $type)
     {
         $str = (string)$str;
 
