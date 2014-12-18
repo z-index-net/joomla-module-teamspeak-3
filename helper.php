@@ -13,9 +13,12 @@ JLoader::register('TeamSpeak3', JPATH_LIBRARIES . '/TeamSpeak3/TeamSpeak3.php');
 
 TeamSpeak3::init();
 
+JLoader::import('joomla.filesystem.folder');
+JLoader::import('joomla.filesystem.file');
+
 class ModTeamspeak3Helper
 {
-    public static function getData(JRegistry &$params, stdClass &$module)
+    public static function getData(JRegistry $params, stdClass $module)
     {
         if (!$params->get('server_host') || !$params->get('server_port') || !$params->get('query_port') || !$params->get('query_login') || !$params->get('query_password')) {
             return JText::_('MOD_TEAMSPEAK3_BASIC_CONFIGURATION_MISSING');
@@ -23,7 +26,7 @@ class ModTeamspeak3Helper
 
         $cache = JFactory::getCache('teamspeak3', 'output');
         $cache->setCaching(1);
-        $cache->setLifeTime($params->get('cache_time', 5) * 60);
+        $cache->setLifeTime($params->get('cache_time', 5));
 
         $query = array();
         $query['server_port'] = $params->get('server_port');
@@ -42,10 +45,13 @@ class ModTeamspeak3Helper
             try {
                 $ts3 = TeamSpeak3::factory($url);
 
-                $html = new TeamSpeak3_Viewer_Html_Joomla($params, $module);
+                $html = new TeamSpeak3_Viewer_Html_Joomla($params);
+
+                $html->loadCacheIcons();
 
                 $data = new stdClass;
                 $data->infos = $ts3->getInfo(true, true);
+                $data->infos['caching_timestamp'] = JFactory::getDate('now', 'UTC')->toSql();
 
                 if ($params->get('channel_id')) {
                     try {
@@ -58,6 +64,8 @@ class ModTeamspeak3Helper
                 } else {
                     $data->viewer = $ts3->getViewer($html);
                 }
+
+                $html->storeCacheIcons();
 
                 $data->title = $html->getModuleTitle();
 
@@ -84,6 +92,13 @@ class ModTeamspeak3Helper
                 return JHtml::_('date', $str, JText::_('DATE_FORMAT_LC2'));
                 break;
 
+            case 'caching_timestamp':
+                $from_time = JFactory::getDate($str, 'UTC')->toUnix();
+                $to_time = JFactory::getDate('now', 'UTC')->toUnix();
+
+                return JHtml::_('date', $str, 'H:i:s') . JText::sprintf('MOD_TEAMSPEAK3_INFOS_CACHING_TIMESTAMP_AGO', ($to_time - $from_time));
+                break;
+
             case 'virtualserver_flag_password':
                 return ($str == 1) ? JText::_('JYES') : JText::_('JNO');
                 break;
@@ -99,19 +114,15 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
 {
     protected $params;
 
-    protected $module;
-
     protected $title;
 
     protected $linkPrefix;
 
     protected $images = '/media/mod_teamspeak3/images/';
 
-    public function __construct(JRegistry &$params, stdClass &$module)
+    public function __construct(JRegistry $params)
     {
         $this->params = $params;
-
-        $this->module = $module;
 
         if ($this->params->get('join_links')) {
             $this->linkPrefix = 'ts3server://' . $this->params->get('server_host') . '?port=' . $this->params->get('server_port');
@@ -125,7 +136,7 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
             }
         }
 
-        parent::__construct(JUri::base(true) . $this->images, JUri::base(true) . $this->images . 'flags/', 'data:image');
+        parent::__construct(JUri::root(false) . $this->images, JUri::root(false) . $this->images . 'flags/', 'data:image');
     }
 
     public function getModuleTitle()
@@ -231,7 +242,7 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
         }
 
         if (JFile::exists($path . $avatar_name)) {
-            return JHtml::_('image', JUri::root() . $this->images . 'avatars/' . $avatar_name, '', array('class' => 'avatar'));
+            return JHtml::_('image', JUri::root(false) . $this->images . 'avatars/' . $avatar_name, '', array('class' => 'avatar'));
         }
 
         return '';
@@ -239,9 +250,6 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
 
     protected function deleteExpiredAvatars($path)
     {
-        JLoader::import('joomla.filesystem.folder');
-        JLoader::import('joomla.filesystem.file');
-
         $files = JFolder::files($path);
 
         if (empty($files)) {
@@ -253,6 +261,29 @@ class TeamSpeak3_Viewer_Html_Joomla extends TeamSpeak3_Viewer_Html
         foreach ($files as $file) {
             if (filemtime($path . $file) <= $expired) {
                 JFile::delete($path . $file);
+            }
+        }
+    }
+
+    public function loadCacheIcons()
+    {
+        $path = JPATH_ROOT . $this->images . 'icons/';
+
+        $icons = JFolder::files($path);
+
+        foreach ($icons as $icon) {
+            $this->cacheIcon[$icon] = new TeamSpeak3_Helper_String(JFile::read($path . $icon));
+        }
+    }
+
+    public function storeCacheIcons()
+    {
+        $path = JPATH_ROOT . $this->images . 'icons/';
+
+        foreach ($this->cacheIcon as $name => $icon) {
+            if (!JFile::exists($path . $name)) {
+                $content = (string)$icon;
+                JFile::write($path . $name, $content);
             }
         }
     }
