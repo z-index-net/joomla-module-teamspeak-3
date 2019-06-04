@@ -4,38 +4,39 @@
     <target name="build">
         <if>
             <not>
-                <isset property="path" />
+                <isset property="path"/>
             </not>
             <then>
-                <input message="Please enter a Path:" propertyName="path" />
+                <input message="Please enter a Path:" propertyName="path"/>
             </then>
         </if>
 
-        <property name="tmp" value="${project.basedir}/_tmp" />
+        <property name="tmp" value="${project.basedir}/_tmp"/>
 
-        <exec command="git rev-list --count HEAD" dir="." outputProperty="revision" />
+        <exec command="git rev-list --count HEAD" dir="." outputProperty="revision"/>
 
-        <property name="zip" value="${path}${phing.project.name}.rev.${revision}.zip" />
+        <property name="zip" value="${path}${phing.project.name}.rev.${revision}.zip"/>
 
-        <delete dir="${tmp}" quiet="true" />
-        <delete file="${zip}" quiet="true" />
+        <delete dir="${tmp}" quiet="true"/>
+        <delete file="${zip}" quiet="true"/>
 
         <copy todir="${tmp}">
             <fileset dir=".">
-                <include name="**" />
-                <exclude name="build.xml" />
-                <exclude name=".**" />
+                <include name="**"/>
+                <exclude name="build.xml"/>
+                <exclude name="screenshots"/>
+                <exclude name=".**"/>
             </fileset>
             <filterchain>
                 <replacetokens>
-                    <token key="REVISION" value="rev ${revision}" />
+                    <token key="REVISION" value="rev ${revision}"/>
                 </replacetokens>
             </filterchain>
         </copy>
 
-        <zip basedir="${tmp}" destfile="${zip}" />
+        <zip basedir="${tmp}" destfile="${zip}"/>
 
-        <delete dir="${tmp}" quiet="true" />
+        <delete dir="${tmp}" quiet="true"/>
     </target>
 
-</project> 
+</project>
