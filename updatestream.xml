@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<updates>
+    <update>
+        <name>Teamspeak 3</name>
+        <element>mod_teamspeak3</element>
+        <type>module</type>
+        <client>0</client>
+        <version>rev 25</version>
+        <infourl>https://github.com/b2un0/joomla-module-teamspeak-3</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/b2un0/joomla-module-teamspeak-3/releases/download/0.0.25/mod_teamspeak3.zip</downloadurl>
+        </downloads>
+        <targetplatform name="joomla" version="^3\."/>
+    </update>
+</updates>
+
