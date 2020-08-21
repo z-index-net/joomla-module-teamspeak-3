@@ -1,5 +1,8 @@
 # Joomla Teamspeak 3 Module
 
+![](https://img.shields.io/static/v1?label=Joomla&message=3.X&style=flat&logo=joomla&logoColor=orange&color=blue)
+![](https://img.shields.io/github/downloads/z-index-net/joomla-module-teamspeak-3/total.svg)
+
 You must generate a query client login as ServerAdmin with your TS3 Client on "Extras" -> "ServerQuery Login" to use this module.
 
 This module doesn't work on most free or low cost webspaces because they block all outgoing connections! Try www.tsviewer.com instead!
