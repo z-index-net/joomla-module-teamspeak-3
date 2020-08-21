@@ -27,7 +27,7 @@
         <language tag="de-DE">de-DE/de-DE.mod_teamspeak3.sys.ini</language>
     </languages>
     <updateservers>
-        <server type="collection" priority="1" name="z-index development">http://www.z-index.net/en/extensions.xml</server>
+        <server type="extension" priority="1" name="mod_teamspeak3">https://raw.githubusercontent.com/z-index-net/joomla-module-teamspeak-3/master/updatestream.xml</server>
     </updateservers>
     <config>
         <fields name="params">
@@ -55,7 +55,7 @@
                     <option value="0">JNO</option>
                 </field>
                 <field name="infos" type="checkboxes" class="checkbox" label="MOD_TEAMSPEAK3_INFOS_LABEL" description="MOD_TEAMSPEAK3_INFOS_DESC">
-                    <option value="caching_timestamp">MOD_TEAMSPEAK3_INFOS_CACHING_TIMESTAMP</option>  
+                    <option value="caching_timestamp">MOD_TEAMSPEAK3_INFOS_CACHING_TIMESTAMP</option>
                     <option value="virtualserver_platform">MOD_TEAMSPEAK3_INFOS_VIRTUALSERVER_PLATFORM</option>
                     <option value="virtualserver_version">MOD_TEAMSPEAK3_INFOS_VIRTUALSERVER_VERSION</option>
                     <option value="virtualserver_maxclients">MOD_TEAMSPEAK3_INFOS_VIRTUALSERVER_MAXCLIENTS</option>
