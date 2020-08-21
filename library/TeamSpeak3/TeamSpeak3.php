@@ -121,7 +121,7 @@ class TeamSpeak3
   const TEXTMSG_CLIENT  = 0x01; //!< 1: target is a client
   const TEXTMSG_CHANNEL = 0x02; //!< 2: target is a channel
   const TEXTMSG_SERVER  = 0x03; //!< 3: target is a virtual server
-  
+
   /*@
    * TeamSpeak 3 plugin command target modes.
    */
@@ -461,7 +461,7 @@ class TeamSpeak3
   protected static function getFilePath($name)
   {
     $path = str_replace("_", DIRECTORY_SEPARATOR, $name);
-    $path = str_replace(__CLASS__, dirname(__FILE__), $path);
+    $path = str_replace(__CLASS__, __DIR__, $path);
 
     return $path;
   }
@@ -606,7 +606,7 @@ class TeamSpeak3
  * with the TeamSpeak 3 Server.
  *
  * There are lots of arguments for the TS3 PHP Framework in comparison with other PHP based libraries. It is the most
- * dynamic and feature-rich piece of software in its class. In addition, it's always up-to-date and 100% compatible to 
+ * dynamic and feature-rich piece of software in its class. In addition, it's always up-to-date and 100% compatible to
  * almost any TeamSpeak 3 Server version available.
  *
  * \section sysreqs_sec Requirements
@@ -852,12 +852,12 @@ class TeamSpeak3
  *   // get notified on incoming private messages
  *   $ts3_VirtualServer->notifyRegister("textprivate");
  *
- *   // register a callback for notifyTextmessage events 
+ *   // register a callback for notifyTextmessage events
  *   TeamSpeak3_Helper_Signal::getInstance()->subscribe("notifyTextmessage", "onTextmessage");
- *   
+ *
  *   // wait for events
  *   while(1) $ts3_VirtualServer->getAdapter()->wait();
- *  
+ *
  *   // define a callback function
  *   function onTextmessage(TeamSpeak3_Adapter_ServerQuery_Event $event, TeamSpeak3_Node_Host $host)
  *   {
