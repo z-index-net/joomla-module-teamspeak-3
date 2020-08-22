@@ -1,4 +1,4 @@
-# Joomla Teamspeak 3 Module
+# Teamspeak 3 Extension for Joomla
 
 ![](https://img.shields.io/static/v1?label=Joomla&message=3.X&style=flat&logo=joomla&logoColor=orange&color=blue)
 ![](https://img.shields.io/github/downloads/z-index-net/joomla-module-teamspeak-3/total.svg)
@@ -26,17 +26,6 @@ If you have any troubles with unapplied configurations clean the cache item "tea
 - option to display only specified channel and all sub channels (for shared server)
 - all custom icons and avatars are downloaded directly from your ts3 server
 
-### Changelog
-- 2018-04-18
-    - new: TS3 php framework updated to 1.1.32 (PHP 7.2 compatiblity)
-- 2014-12-18
-    - fixed: cache time in seconds
-    - new: cli file for updates via cron
-    - new: caching time info row (must be enabled)
-- 2014-05-21
-    - fixed: exception handler
-
-
 ### Preview
 
 ![Screenshot](./screenshots/mod_teamspeak3.0.png?raw=true)
@@ -50,7 +39,6 @@ If you have any troubles with unapplied configurations clean the cache item "tea
 ![Screenshot](./screenshots/mod_teamspeak3.4.png?raw=true)
 
 ![Screenshot](./screenshots/mod_teamspeak3.5.png?raw=true)
-
 
 
 ### Credits
